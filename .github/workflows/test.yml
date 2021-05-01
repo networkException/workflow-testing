@@ -7,6 +7,9 @@ jobs:
         steps:
             - name: Output finished
               run: echo '${{ join(needs.*.outputs.finished) }}'
+            - name: Check finished
+              run: |
+                [ "${{ join(needs.*.outputs.finished) }}" == "yes" ] exit 1
             - name: Output needs
               run: echo '${{ toJSON(needs) }}'
             - name: Set variables
@@ -18,10 +21,12 @@ jobs:
     b:
         runs-on: ubuntu-latest
         needs: "a"
-        if: "false"
         steps:
             - name: Output finished
               run: echo '${{ join(needs.*.outputs.finished) }}'
+            - name: Check finished
+              run: |
+                [ "${{ join(needs.*.outputs.finished) }}" == "yes" ] exit 1
             - name: Output needs
               run: echo '${{ toJSON(needs) }}'
             - name: Set variables
@@ -33,10 +38,12 @@ jobs:
     c:
         runs-on: ubuntu-latest
         needs: "b"
-        if: "true"
         steps:
             - name: Output finished
               run: echo '${{ join(needs.*.outputs.finished) }}'
+            - name: Check finished
+              run: |
+                [ "${{ join(needs.*.outputs.finished) }}" == "yes" ] exit 1
             - name: Output needs
               run: echo '${{ toJSON(needs) }}'
             - name: Set variables
@@ -48,10 +55,12 @@ jobs:
     d:
         runs-on: ubuntu-latest
         needs: "c"
-        if: join(needs.*.outputs.finished) != 'yes'
         steps:
             - name: Output finished
               run: echo '${{ join(needs.*.outputs.finished) }}'
+            - name: Check finished
+              run: |
+                [ "${{ join(needs.*.outputs.finished) }}" == "yes" ] exit 1
             - name: Output needs
               run: echo '${{ toJSON(needs) }}'
             - name: Set variables
