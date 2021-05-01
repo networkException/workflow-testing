@@ -33,7 +33,7 @@ jobs:
     c:
         runs-on: ubuntu-latest
         needs: "b"
-        if: join(needs.*.outputs.finished) != 'yes'
+        if: "true"
         steps:
             - name: Output finished
               run: echo '${{ join(needs.*.outputs.finished) }}'
