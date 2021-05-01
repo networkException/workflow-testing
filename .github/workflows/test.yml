@@ -5,6 +5,8 @@ jobs:
     a:
         runs-on: ubuntu-latest
         steps:
+            - name: Output finished
+              run: echo '${{ join(needs.*.outputs.finished) }}'
             - name: Output needs
               run: echo '${{ toJSON(needs) }}'
             - name: Set variables
@@ -18,6 +20,8 @@ jobs:
         needs: "a"
         if: join(needs.*.outputs.finished) != 'yes'
         steps:
+            - name: Output finished
+              run: echo '${{ join(needs.*.outputs.finished) }}'
             - name: Output needs
               run: echo '${{ toJSON(needs) }}'
             - name: Set variables
@@ -31,6 +35,8 @@ jobs:
         needs: "b"
         if: join(needs.*.outputs.finished) != 'yes'
         steps:
+            - name: Output finished
+              run: echo '${{ join(needs.*.outputs.finished) }}'
             - name: Output needs
               run: echo '${{ toJSON(needs) }}'
             - name: Set variables
@@ -44,6 +50,8 @@ jobs:
         needs: "c"
         if: join(needs.*.outputs.finished) != 'yes'
         steps:
+            - name: Output finished
+              run: echo '${{ join(needs.*.outputs.finished) }}'
             - name: Output needs
               run: echo '${{ toJSON(needs) }}'
             - name: Set variables
