@@ -1,0 +1,53 @@
+name: Build ungoogled-chromium-archlinux for testing
+on: [push, pull_request]
+
+jobs:
+    a:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Say hello
+              run: echo hello
+            - name: Set variables
+              id: variables
+              run: echo "::set-output name=finished::no"
+        outputs:
+            finished: "${{ steps.variables.outputs.finished }}"
+    
+    b:
+        runs-on: ubuntu-latest
+        needs: "a"
+        if: join(needs.*.outputs.finished) != 'yes'
+        steps:
+            - name: Say hello
+              run: echo hello
+            - name: Set variables
+              id: variables
+              run: echo "::set-output name=finished::yes"
+        outputs:
+            finished: "${{ steps.variables.outputs.finished }}"
+
+    c:
+        runs-on: ubuntu-latest
+        needs: "b"
+        if: join(needs.*.outputs.finished) != 'yes'
+        steps:
+            - name: Say hello
+              run: echo hello
+            - name: Set variables
+              id: variables
+              run: echo "::set-output name=finished::yes"
+        outputs:
+            finished: "${{ steps.variables.outputs.finished }}"
+
+    d:
+        runs-on: ubuntu-latest
+        needs: "c"
+        if: join(needs.*.outputs.finished) != 'yes'
+        steps:
+            - name: Say hello
+              run: echo hello
+            - name: Set variables
+              id: variables
+              run: echo "::set-output name=finished::yes"
+        outputs:
+            finished: "${{ steps.variables.outputs.finished }}"
