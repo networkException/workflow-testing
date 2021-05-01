@@ -39,6 +39,7 @@ jobs:
         if: join(needs.*.outputs.finished)
         steps:
             - name: Output finished
+              if: join(needs.*.outputs.finished)
               run: echo '${{ join(needs.*.outputs.finished) }}'
             - name: Check finished
               run: if [[ "${{ join(needs.*.outputs.finished) }}" == "yes" ]]; then exit 0; fi
