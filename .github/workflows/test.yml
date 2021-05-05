@@ -14,6 +14,7 @@ jobs:
             - name: Run container
               run: docker run
                   --name "package"
-                  --entrypoint "/bin/bash -c 'pacman -U package && chromium --version'"
+                  --entrypoint /bin/bash
                   --mount type=bind,source="$(pwd)/package",target=/home/build/package
                   "docker.pkg.github.com/ungoogled-software/ungoogled-chromium-archlinux/ungoogled-chromium-archlinux-testing:latest"
+                   -c 'pacman -U package && chromium --version'
