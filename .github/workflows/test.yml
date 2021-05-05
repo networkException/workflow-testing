@@ -2,13 +2,18 @@ name: Build ungoogled-chromium-archlinux for testing
 on: [push, pull_request]
 
 jobs:
-    a:
+    test-package:
         runs-on: ubuntu-latest
-        container: docker.pkg.github.com/ungoogled-software/ungoogled-chromium-archlinux/ungoogled-chromium-archlinux-testing:latest
         steps:
-            - name: get package
-              run: wget https://download.opensuse.org/repositories/home:/ungoogled_chromium:/testing/Arch/x86_64/ungoogled-chromium-89.0.4389.114-2-x86_64.pkg.tar.zst
-            - name: Install package
-              run: docker run pacman -U ungoogled-chromium-*.pkg.*
-            - name: Test package
-              run: chromium --version
+            - name: Log into registry
+              run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+            - name: Pull image
+              run: docker pull "docker.pkg.github.com/ungoogled-software/ungoogled-chromium-archlinux/ungoogled-chromium-archlinux-testing:latest"
+            - name: Download package
+              run: wget https://nwex.de/package
+            - name: Run container
+              run: docker run
+                  --name "package"
+                  --entrypoint "/bin/bash -c 'pacman -U package && chromium --version'"
+                  --mount type=bind,source="$(pwd)/package",target=/home/build/package
+                  "docker.pkg.github.com/ungoogled-software/ungoogled-chromium-archlinux/ungoogled-chromium-archlinux-testing:latest"
