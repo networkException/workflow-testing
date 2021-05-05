@@ -17,4 +17,4 @@ jobs:
                   --entrypoint /bin/bash
                   --mount type=bind,source="$(pwd)/package",target=/home/build/package
                   "docker.pkg.github.com/ungoogled-software/ungoogled-chromium-archlinux/ungoogled-chromium-archlinux-testing:latest"
-                   -c 'sudo pacman -U /home/build/package && chromium --version'
+                   -c 'sudo pacman -U /home/build/package --noconfirm && chromium --version'
