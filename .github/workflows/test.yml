@@ -4,65 +4,11 @@ on: [push, pull_request]
 jobs:
     a:
         runs-on: ubuntu-latest
+        container: docker.pkg.github.com/ungoogled-software/ungoogled-chromium-archlinux/ungoogled-chromium-archlinux-testing:latest
         steps:
-            - name: Output finished
-              run: echo '${{ join(needs.*.outputs.finished) }}'
-            - name: Check finished
-              run: if [[ "${{ join(needs.*.outputs.finished) }}" == "yes" ]]; then exit 0; fi
-            - name: Output needs
-              run: echo '${{ toJSON(needs) }}'
-            - name: Set variables
-              id: variables
-              run: echo "::set-output name=finished::no"
-        outputs:
-            finished: "${{ steps.variables.outputs.finished }}"
-    
-    b:
-        runs-on: ubuntu-latest
-        needs: "a"
-        steps:
-            - name: Output finished
-              run: echo '${{ join(needs.*.outputs.finished) }}'
-            - name: Check finished
-              run: if [[ "${{ join(needs.*.outputs.finished) }}" == "yes" ]]; then exit 0; fi
-            - name: Output needs
-              run: echo '${{ toJSON(needs) }}'
-            - name: Set variables
-              id: variables
-              run: echo "::set-output name=finished::yes"
-        outputs:
-            finished: "${{ steps.variables.outputs.finished }}"
-
-    c:
-        runs-on: ubuntu-latest
-        needs: "b"
-        if: ${{ join(needs.*.outputs.finished) == 'no' }}
-        steps:
-            - name: Output finished
-              if: ${{ join(needs.*.outputs.finished) != 'yes' }}
-              run: echo '${{ join(needs.*.outputs.finished) }}'
-            - name: Check finished
-              run: if [[ "${{ join(needs.*.outputs.finished) }}" == "yes" ]]; then exit 0; fi
-            - name: Output needs
-              run: echo '${{ toJSON(needs) }}'
-            - name: Set variables
-              id: variables
-              run: echo "::set-output name=finished::yes"
-        outputs:
-            finished: "${{ steps.variables.outputs.finished }}"
-
-    d:
-        runs-on: ubuntu-latest
-        needs: "c"
-        steps:
-            - name: Output finished
-              run: echo '${{ join(needs.*.outputs.finished) }}'
-            - name: Check finished
-              run: if [[ "${{ join(needs.*.outputs.finished) }}" == "yes" ]]; then exit 0; fi
-            - name: Output needs
-              run: echo '${{ toJSON(needs) }}'
-            - name: Set variables
-              id: variables
-              run: echo "::set-output name=finished::yes"
-        outputs:
-            finished: "${{ steps.variables.outputs.finished }}"
+            - name: get package
+              run: wget https://download.opensuse.org/repositories/home:/ungoogled_chromium:/testing/Arch/x86_64/ungoogled-chromium-89.0.4389.114-2-x86_64.pkg.tar.zst
+            - name: Install package
+              run: docker run pacman -U ungoogled-chromium-*.pkg.*
+            - name: Test package
+              run: chromium --version
