@@ -5,7 +5,7 @@ jobs:
     test-package:
         runs-on: ubuntu-latest
         steps:
-            - name: Set variables
+            - name: Set variables or something
               id: variables
               run: |
                 echo "::set-output name=a::yes"
