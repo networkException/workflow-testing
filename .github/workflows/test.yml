@@ -5,16 +5,15 @@ jobs:
     test-package:
         runs-on: ubuntu-latest
         steps:
-            - name: Log into registry
-              run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-            - name: Pull image
-              run: docker pull "docker.pkg.github.com/ungoogled-software/ungoogled-chromium-archlinux/ungoogled-chromium-archlinux-testing:latest"
-            - name: Download package
-              run: wget https://nwex.de/package
-            - name: Run container
-              run: docker run
-                  --name "package"
-                  --entrypoint /bin/bash
-                  --mount type=bind,source="$(pwd)/package",target=/home/build/package
-                  "docker.pkg.github.com/ungoogled-software/ungoogled-chromium-archlinux/ungoogled-chromium-archlinux-testing:latest"
-                   -c 'sudo pacman -U /home/build/package --noconfirm && chromium --version'
+            - name: Set variables
+              id: variables
+              run: |
+                echo "::set-output name=a::yes"
+                echo "::set-output name=b::yes"
+                echo "::set-output name=c::no"
+            - name: Should run
+              if: ${{ steps.variables.outputs.a == 'yes' && steps.variables.outputs.b == 'yes' }}
+              run: echo yes
+            - name: Should not run
+              if: ${{ steps.variables.outputs.b == 'yes' && steps.variables.outputs.c == 'yes' }}
+              run: echo no
