@@ -1,19 +1,9 @@
-name: Build ungoogled-chromium-archlinux for testing
-on: [push, pull_request]
+name: Test workflow
+on: [push]
 
 jobs:
     test-package:
         runs-on: ubuntu-latest
         steps:
-            - name: Set variables or something
-              id: variables
-              run: |
-                echo "::set-output name=a::yes"
-                echo "::set-output name=b::yes"
-                echo "::set-output name=c::no"
-            - name: Should run
-              if: ${{ steps.variables.outputs.a == 'yes' && steps.variables.outputs.b == 'yes' }}
-              run: echo yes
-            - name: Should not run
-              if: ${{ steps.variables.outputs.b == 'yes' && steps.variables.outputs.c == 'yes' }}
-              run: echo no
+            - name: Build progress
+              uses: './.github/actions/build'
