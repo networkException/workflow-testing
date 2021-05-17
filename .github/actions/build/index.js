@@ -1,1 +1,3 @@
-console.log('test');
+import * as github from '@actions/github'
+
+console.log(github.context.serverUrl);

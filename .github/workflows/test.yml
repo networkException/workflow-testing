@@ -7,5 +7,7 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v2
+            - name: Setup action
+              run: npm install --prefix ./.github/actions/build
             - name: Build progress
-              uses: './.github/actions/build'
+              uses: ./.github/actions/build
