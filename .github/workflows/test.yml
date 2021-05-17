@@ -2,7 +2,13 @@ name: Test workflow
 on: [push]
 
 jobs:
-    test-package:
+    test-1:
+        runs-on: ubuntu-latest
+        outputs:
+            a: 'b'
+
+    test-2:
+        needs: test-1
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
