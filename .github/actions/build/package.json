@@ -1,9 +1,10 @@
 {
     "scripts": {
-        "start": "node index.js"
+        "start": "ts-node index.ts"
     },
     "dependencies": {
         "@actions/core": "^1.2.7",
-        "@actions/github": "^5.0.0"
+        "@actions/github": "^5.0.0",
+        "ts-node": "^9.1.1"
     }
 }

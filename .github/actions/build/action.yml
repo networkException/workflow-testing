@@ -1,5 +1,0 @@
-name: "Build progress"
-description: "Build progress in container"
-runs:
-    using: "node12"
-    main: "index.js"
