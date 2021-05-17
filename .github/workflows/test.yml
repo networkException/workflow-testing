@@ -4,9 +4,11 @@ on: [push]
 jobs:
     test-1:
         runs-on: ubuntu-latest
+        steps:
+            - name: nothing
+              run: echo nothing
         outputs:
-            a: 'b'
-
+            a: "b"
     test-2:
         needs: test-1
         runs-on: ubuntu-latest
