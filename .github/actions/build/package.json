@@ -1,12 +1,11 @@
 {
     "scripts": {
-        "start": "ts-node index.ts"
+        "setup": "npm install && tsc -p tsconfig.json"
     },
     "dependencies": {
         "@actions/artifact": "^0.5.1",
         "@actions/core": "^1.2.7",
         "@actions/github": "^5.0.0",
-        "ts-node": "^9.1.1",
         "typescript": "^4.2.4"
     }
 }
