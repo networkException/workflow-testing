@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "start": "ts-node index.ts"
+        "start": "ts-node index.ts --unhandled-rejections=strict"
     },
     "dependencies": {
         "@actions/artifact": "^0.5.1",
