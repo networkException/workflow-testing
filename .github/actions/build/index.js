@@ -1,3 +1,3 @@
-import * as github from '@actions/github'
+const github = require('@actions/github');
 
 console.log(github.context.serverUrl);
