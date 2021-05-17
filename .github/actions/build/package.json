@@ -1,6 +1,5 @@
 {
     "scripts": {
-        "postinstall": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
         "@actions/core": "^1.2.7",
