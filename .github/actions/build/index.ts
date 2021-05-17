@@ -1,3 +1,9 @@
 import * as github from '@actions/github';
+import * as artifact from '@actions/artifact';
+import { ArtifactClient } from '@actions/artifact';
+
+const artifactClient: ArtifactClient = artifact.create();
+
+artifactClient.uploadArtifact('test', [ '.github/actions/build/index.ts' ], '.');
 
 console.log(github.context.runNumber);
