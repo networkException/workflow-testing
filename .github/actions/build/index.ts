@@ -1,3 +1,3 @@
-import github from '@actions/github';
+import * as github from '@actions/github';
 
-console.log(github.context.serverUrl);
+console.log(github.context.runNumber);
