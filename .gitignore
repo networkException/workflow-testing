@@ -1,1 +1,2 @@
 .github/actions/build/node_modules
+.github/actions/build/*.js
