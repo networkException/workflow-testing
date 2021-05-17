@@ -11,3 +11,5 @@ jobs:
               run: npm run setup --prefix ./.github/actions/build
             - name: Run action
               uses: ./.github/actions/build
+              with:
+                  needs: "${{ toJSON(needs) }}"
