@@ -7,6 +7,12 @@ jobs:
         steps:
             - name: nothing
               run: echo nothing
+            - name: artifact
+              run: echo "x" > x
+            - uses: actions/upload-artifact@v2
+              with:
+                  name: test
+                  path: x
         outputs:
             a: "b"
     test-2:
