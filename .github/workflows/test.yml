@@ -5,14 +5,10 @@ jobs:
     test-1:
         runs-on: ubuntu-latest
         steps:
-            - name: nothing
-              run: echo nothing
-            - name: artifact
-              run: echo "x" > x
-            - uses: actions/upload-artifact@v2
-              with:
-                  name: test
-                  path: x
+            - name: Log into registry
+              run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            - name: Pust image to ghcr
+              run: docker pull alpine && docker tag alpine ghcr.io/networkexception/workflow-testing && docker push ghcr.io/networkexception/workflow-testing
         outputs:
             a: "b"
     test-2:
