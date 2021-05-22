@@ -3,8 +3,7 @@ import * as github from '@actions/github';
 
 const octokit = github.getOctokit(core.getInput('token', { required: true }));
 
-octokit.request(`GET /orgs/{org}/packages/{package_type}/{package_name}`, {
-    org: 'networkException',
+octokit.request(`GET /user/packages/{package_type}/{package_name}`, {
     package_type: 'container',
     package_name: 'workflow-testing',
     headers: {
