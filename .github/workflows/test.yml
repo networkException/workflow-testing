@@ -26,4 +26,4 @@ jobs:
             - name: Run action
               uses: ./.github/actions/build
               with:
-                  needs: "${{ toJSON(needs) }}"
+                  token: "${{ secrets.GITHUB_TOKEN }}"

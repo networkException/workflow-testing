@@ -4,6 +4,6 @@ runs:
     using: "node12"
     main: "index.js"
 inputs:
-    needs:
-        description: a
+    token:
+        description: GitHub Token
         required: true

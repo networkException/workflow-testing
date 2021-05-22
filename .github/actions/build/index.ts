@@ -1,9 +1,10 @@
-import * as arifactHost from '@actions/artifact';
-import * as shell from '@actions/exec';
+import * as core from '@actions/core';
+import * as github from '@actions/github';
 
-const artifact = arifactHost.create();
+const octokit = github.getOctokit(core.getInput('token', { required: true }));
 
-(async () => {
-    await artifact.downloadArtifact('test');
-    await shell.exec('ls -lah');
-})();
+octokit.request(`GET /orgs/${github.context.repo.owner}/packages/container/ungoogled-chromium-archlinux`, { 
+    headers: {
+        accept: 'application/vnd.github.v3+json'
+    }
+}).then(console.log);
