@@ -4,7 +4,6 @@ on: [push]
 jobs:
     test-1:
         runs-on: ubuntu-latest
-        container: archlinux
         steps:
             - name: Test criu
-              run: pacman -Sy criu --noconfirm && criu check
+              run: add-apt-repository ppa:criu/ppa -yu && apt install criu && criu check
