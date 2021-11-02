@@ -4,12 +4,7 @@ on: [push]
 jobs:
     test-1:
         runs-on: ubuntu-latest
+        container: archlinux
         steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-            - name: Setup action
-              run: npm run setup --prefix ./.github/actions/build
-            - name: Run action
-              uses: ./.github/actions/build
-              with:
-                  token: "${{ secrets.GITHUB_TOKEN }}"
+            - name: Test criu
+              run: pacman -Sy criu --noconfirm && criu check
