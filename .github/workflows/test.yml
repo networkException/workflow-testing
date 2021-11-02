@@ -6,4 +6,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Test criu
-              run: add-apt-repository ppa:criu/ppa -yu && apt install criu && criu check
+              run: sudo add-apt-repository ppa:criu/ppa -yu && sudo apt install criu && sudo criu check
