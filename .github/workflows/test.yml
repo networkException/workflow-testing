@@ -19,4 +19,4 @@ jobs:
             image: archlinux
         steps:
             -   name: Show disk usage
-                run: df -h
+                run: echo ${{ needs.test-1.outputs.foo }}
