@@ -9,7 +9,7 @@ jobs:
                 id: bar
                 run: echo ::set-output name=foo::false
         outputs:
-            foo: ${{ fromJSON(steps.bar.outputs.foo) }}
+            foo: fromJSON(steps.bar.outputs.foo)
 
     test-2:
         runs-on: ubuntu-latest
