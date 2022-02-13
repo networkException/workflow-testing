@@ -5,8 +5,8 @@ jobs:
     test-1:
         runs-on: ubuntu-latest
         steps:
-            -   name: Show disk usage
-                run: df -h
+            -   name: Print true as json
+                run: echo ${{ toJSON(true) }}
 
     test-2:
         runs-on: ubuntu-latest
