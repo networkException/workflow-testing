@@ -6,6 +6,7 @@ on:
             test:
                 description: "something something"
                 required: true
+                type: choice
                 options:
                     - "a"
                     - "b"
