@@ -15,5 +15,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: Print test
-                run: echo ${{ github.event.inputs.test }}
-
+                run: echo "'${{ github.event.inputs.test }}'"
