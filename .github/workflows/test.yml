@@ -15,5 +15,5 @@ jobs:
     test-1:
         runs-on: ubuntu-latest
         steps:
-            -   name: Print test
-                run: echo "'${{ github.event.inputs.test }}'"
+            -   name: Print all mountpoints
+                run: sudo findmnt
