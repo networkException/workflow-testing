@@ -31,10 +31,14 @@ jobs:
         steps:
             - name: Free space on runner
               run: |
-                  pacman -Syu --needed --noconfirm docker base-devel
+                  pacman -Syu --needed --noconfirm docker base-devel duf
+
+                  duf
 
                   sudo rm -rf /host/usr/share/dotnet
                   sudo rm -rf /host/usr/local/lib/android
                   sudo rm -rf /host/opt/ghc
                   sudo rm -rf /host/opt/hostedtoolcache/CodeQL
                   sudo docker image prune --all --force
+
+                  duf
